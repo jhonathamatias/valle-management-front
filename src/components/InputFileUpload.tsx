@@ -151,6 +151,7 @@ export default function InputFileUpload({
               sx={{
                 color: colorStyle()
               }}
+              textAlign="center"
             >
               Arraste e solte alguns arquivos aqui ou clique para selecionar os arquivos
             </Typography>
