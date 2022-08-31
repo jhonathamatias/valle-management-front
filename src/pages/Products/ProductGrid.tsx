@@ -79,7 +79,7 @@ export default function GridTable() {
   });
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 470, width: '100%' }}>
       <DataGrid
         rowHeight={75}
         pagination
@@ -90,7 +90,7 @@ export default function GridTable() {
         }}
         sx={{
           background: '#fff',
-          marginTop: 3
+          borderRadius: { xs: 0 }
         }}
         {...data}
       />

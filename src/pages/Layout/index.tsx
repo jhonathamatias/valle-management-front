@@ -13,11 +13,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
+import Footer from "./Footer";
 
 const mdTheme = createTheme();
 
 export default function Layout({ children, pageTitle }: { children: React.ReactNode, pageTitle: string }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -35,6 +36,7 @@ export default function Layout({ children, pageTitle }: { children: React.ReactN
         <Main>
           {children}
         </Main>
+        <Footer />
       </Box>
     </ThemeProvider>
   );

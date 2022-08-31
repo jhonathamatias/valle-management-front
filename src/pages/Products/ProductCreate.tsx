@@ -41,7 +41,7 @@ function Feedback({
   return (
     <Box
       sx={{
-        padding: 5,
+        padding: 2,
         display: 'flex',
         flexDirection: 'column',
         alignContent: 'center',
@@ -68,24 +68,26 @@ function Feedback({
         }}
       >
         <CheckCircleIcon sx={{ color: '#48bb78' }} />
-        <Typography variant='subtitle1' ml={1} sx={{ fontWeight: 'medium' }}>
-          Cadastrado com concluído!
+        <Typography variant='subtitle1' textAlign="center" ml={1} sx={{ fontWeight: 'medium' }}>
+          Produto cadastrado com sucesso!
         </Typography>
       </Grid>
-      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: { md: 'row', xs: 'column' }, pt: 2 }}>
         <Box sx={{ flex: '1 1 auto' }} />
         <Button
+          size='small'
+          variant="outlined"
+          onClick={() => handleReset()}
+        >
+          cadastrar outro produto
+        </Button>
+        <Button
+          size='small'
           sx={{ mr: 1 }}
           color="inherit"
           href='/products'
         >
           Lista de produtos
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => handleReset()}
-        >
-          cadastrar outro produto
         </Button>
       </Box>
     </Box >
@@ -149,7 +151,7 @@ export default function ProductCreate() {
         setProduct({ ...product, ...data });
         setFormValidated(true);
       }}
-      listenerInvalid={errors => {
+      listenerInvalid={() => {
         setFormValidated(false);
       }}
     />
@@ -172,7 +174,7 @@ export default function ProductCreate() {
           variant="contained"
           sx={{ mt: 3, ml: 1 }}
         >
-          Cadastrar
+          {loading ? "Cadastrando..." : "Cadastrar"}
         </LoadingButton>
       ) : (
         <Button
@@ -225,7 +227,7 @@ export default function ProductCreate() {
 
     try {
       const payload = await makePayload(productData);
-      const response = await api.post('/products', payload);
+      await api.post('/products', payload);
 
       setLoading(false);
       setProductCreated(true);
@@ -237,9 +239,9 @@ export default function ProductCreate() {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
-      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
-        <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+    <Container component="main" maxWidth="lg" sx={{ mb: { xs: 8, md: 4 }, p: { xs: 0 } }}>
+      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 }, mb: { xs: 4 }, borderRadius: { xs: 0 } }}>
+        <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
           {steps.map((step) => (
             <Step key={step.label}>
               <StepLabel>{step.label}</StepLabel>

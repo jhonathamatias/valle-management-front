@@ -1,12 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Tab from '@mui/material/Tab';
+import Tab, { TabProps } from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
+import ListIcon from '@mui/icons-material/List';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useNavigate } from 'react-router-dom';
 import Layout from "../Layout";
 
-interface LinkTabProps {
+interface LinkTabProps extends TabProps {
   label?: string;
   to: string;
 }
@@ -32,10 +34,14 @@ function NavTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{
+      width: '100%',
+      display: 'inline-flex',
+      justifyContent: { xs: 'center', md: 'left' }
+    }}>
       <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-        <LinkTab label="Produtos" to="/products/list" />
-        <LinkTab label="Cadastro de Produtos" to="/products/create" />
+        <LinkTab icon={<ListIcon />} label="produtos"to="/products/list" />
+        <LinkTab icon={<AddShoppingCartIcon />} label="Adicionar" to="/products/create" />
       </Tabs>
     </Box>
   );
@@ -45,7 +51,6 @@ export default function Products() {
   return (
     <Layout pageTitle="Produtos">
       <NavTabs />
-
       <Outlet />
     </Layout>
   );
