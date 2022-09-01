@@ -34,10 +34,10 @@ export default function GridList() {
     return products.map((product: any) => (
       <Box key={product.id}>
         <ListItemButton>
-          <ListItem sx={{ flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'center' }}>
+          <ListItem sx={{ flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'flex-start', pl: { xs: 0 } }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-              <ListItemAvatar sx={{ mr: 3 }}>
-                <Avatar alt="Remy Sharp" src={product.image} sx={{ height: 62, width: 62, }} />
+              <ListItemAvatar sx={{ mr: 2 }}>
+                <Avatar alt="Remy Sharp" src={product.image} sx={{ height: 82, width: 82, border: `2px solid ${grey[300]}` }} />
               </ListItemAvatar>
               <Box>
                 <Typography noWrap variant="h6" mb={1} fontSize="16px">
@@ -67,10 +67,15 @@ export default function GridList() {
             <Box sx={{ display: 'flex', width: '100%' }}>
               <ListItemText
                 sx={{ display: 'flex', justifyContent: 'flex-end' }}
-                secondary={(
-                  <Typography sx={{ fontWeight: '500' }}>
-                    {product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                  </Typography>
+                primary={(
+                  <>
+                    <Typography textAlign="right" sx={{ fontWeight: '500' }}>
+                      {product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                    </Typography>
+                    <Typography variant='caption' color="text.secondary">
+                      {product.created_at}
+                    </Typography>
+                  </>
                 )}
               />
             </Box>

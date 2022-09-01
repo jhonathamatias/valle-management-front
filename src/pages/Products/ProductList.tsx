@@ -20,7 +20,8 @@ export default function ProductList() {
           sx={{
             position: 'absolute',
             bottom: 64,
-            right: 16,
+            right: { md: 16 },
+            left: { xs: 16, md: 'auto' }
           }}
           onClick={() => navigate('/products/create')}
         >
