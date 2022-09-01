@@ -50,7 +50,7 @@ function NavTabs() {
 export default function Products() {
   return (
     <Layout pageTitle="Produtos">
-      <NavTabs />
+      {/* <NavTabs /> */}
       <Outlet />
     </Layout>
   );

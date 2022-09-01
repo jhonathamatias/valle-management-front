@@ -18,7 +18,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
       }}
     >
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 2, mb: 4, p: { xs: 0 } }}>
+      <Container maxWidth="lg" sx={{ mt: 2, mb: 3, p: { xs: 0 } }}>
         {children}
       </Container>
     </Box>

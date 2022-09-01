@@ -8,11 +8,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ShoppingBag from '@mui/icons-material/ShoppingBagOutlined';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBagOutlined';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
-
+import Fab from '@mui/material/Fab';
+import { useNavigate } from 'react-router-dom';
 import ProductInfoForm from './ProductInfoForm';
 import ProductAdditionalInfoForm from './ProductAdditionalInfoForm';
 import ProductPriceForm from './ProductPriceForm';
@@ -48,7 +49,7 @@ function Feedback({
         alignItems: 'center',
       }}
     >
-      <ShoppingBag
+      <ShoppingBagIcon
         sx={{
           marginBottom: 2,
           fontSize: 70,
@@ -101,6 +102,7 @@ export default function ProductCreate() {
   const [product, setProduct] = useState<ProductStateInterface>({} as ProductStateInterface);
   const [productCreated, setProductCreated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleNext = useCallback(() => {
     setActiveStep(activeStep + 1);
@@ -253,6 +255,18 @@ export default function ProductCreate() {
           {!isFeedbackStep() && stepsControlButtons()}
         </>
       </Paper>
+      <Fab
+        aria-label="Add"
+        color='primary'
+        sx={{
+          position: 'absolute',
+          bottom: 64,
+          right: 16,
+        }}
+        onClick={() => navigate('/products')}
+      >
+        <ShoppingBagIcon />
+      </Fab>
     </Container>
   );
 }
