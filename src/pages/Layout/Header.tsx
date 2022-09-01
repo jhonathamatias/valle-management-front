@@ -182,9 +182,8 @@ export default function Header({
             component="h1"
             variant="h6"
             color="inherit"
-            textAlign="center"
             noWrap
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}
           >
             {pageTitle}
           </Typography>
@@ -206,18 +205,6 @@ export default function Header({
               <AccountCircle />
             </IconButton>
           </Box>
-          {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box> */}
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
