@@ -192,6 +192,7 @@ export default function ProductCreate() {
 
   const handleFormSubmit = () => {
     if (formRef.current) {
+      // console.log(formRef.current.dispatchEvent(new Event('submit')));
       formRef.current.requestSubmit();
     }
   };

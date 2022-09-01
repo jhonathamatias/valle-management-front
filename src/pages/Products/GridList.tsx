@@ -37,7 +37,7 @@ export default function GridList() {
           <ListItem sx={{ flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'flex-start', pl: { xs: 0 } }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
               <ListItemAvatar sx={{ mr: 2 }}>
-                <Avatar alt="Remy Sharp" src={product.image} sx={{ height: 82, width: 82, border: `2px solid ${grey[300]}` }} />
+                <Avatar alt="Remy Sharp" src={product.image} sx={{ height: 64, width: 64, border: `2px solid ${grey[300]}` }} />
               </ListItemAvatar>
               <Box>
                 <Typography noWrap variant="h6" mb={1} fontSize="16px">
