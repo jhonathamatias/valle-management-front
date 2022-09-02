@@ -36,7 +36,10 @@ export default function Layout({ children, pageTitle }: { children: React.ReactN
         <Main>
           {children}
         </Main>
-        <Footer />
+        <Footer
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
       </Box>
     </ThemeProvider>
   );

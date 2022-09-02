@@ -46,6 +46,7 @@ export default function SignIn() {
     }, (error: any) => {
       setLoading(false);
       if (axios.isAxiosError(error)) {
+        alert(error);
         // let message = error.response === undefined
         //     ? 'Ocorreu um erro, entre em contato com o suporte'
         //     : error.response?.data?.error.message;

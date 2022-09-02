@@ -9,8 +9,7 @@ import List from '@mui/material/List';
 import { styled, useTheme } from '@mui/material/styles';
 import { mainListItems } from './NavItems';
 import { DRAWER_WIDTH, XS_MOBILE_MD_SCREEN } from '../../constants/style';
-import { useMediaQuery } from '@mui/material';
-import { useEffect } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
