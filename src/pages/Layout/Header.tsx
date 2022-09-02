@@ -5,14 +5,13 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import MoreIcon from '@mui/icons-material/More';
 import MailIcon from '@mui/icons-material/Mail';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Logout from '@mui/icons-material/Logout';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { DRAWER_WIDTH } from '../../constants/style';
 import { useState } from 'react';
 import { useAuthContext } from '../../store/AuthContext';
@@ -24,6 +23,9 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
+  [theme.breakpoints.only('xs')]: {
+    boxShadow: 'none'
+  },
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -54,6 +56,8 @@ export default function Header({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
+  const theme = useTheme();
+
   const toggleDrawer = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -173,7 +177,10 @@ export default function Header({
             onClick={toggleDrawer}
             sx={{
               marginRight: { md: '36px', xs: '-10px' },
-              ...(sidebarOpen && { display: 'none' }),
+              ...((sidebarOpen) && { display: 'none' }),
+              [theme.breakpoints.only('xs')]: {
+                display: 'none'
+              }
             }}
           >
             <MenuIcon />
@@ -183,7 +190,7 @@ export default function Header({
             variant="h6"
             color="inherit"
             noWrap
-            sx={{ flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}
+            sx={{ flexGrow: 1, textAlign: 'left' }}
           >
             {pageTitle}
           </Typography>
