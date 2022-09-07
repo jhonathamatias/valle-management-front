@@ -8,8 +8,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBagOutlined';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import Fab from '@mui/material/Fab';
@@ -20,6 +23,8 @@ import ProductPriceForm from './ProductPriceForm';
 import { ProductFormInterface, ProductPayloadInterface, ProductStateInterface } from '../../interfaces/product.interface';
 import api from '../../services/api';
 import { imageToBase64 } from '../../tools/imageConvert';
+import { grey } from '@mui/material/colors';
+import { useAuthContext } from '../../store/AuthContext';
 
 type StepperType = {
   label: string;
@@ -102,6 +107,7 @@ export default function ProductCreate() {
   const [product, setProduct] = useState<ProductStateInterface>({} as ProductStateInterface);
   const [productCreated, setProductCreated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuthContext();
   const navigate = useNavigate();
 
   const handleNext = useCallback(() => {
@@ -173,7 +179,7 @@ export default function ProductCreate() {
           loading={loading}
           loadingPosition="start"
           startIcon={<SaveIcon />}
-          variant="contained"
+          variant="outlined"
           sx={{ mt: 3, ml: 1 }}
         >
           {loading ? "Cadastrando..." : "Cadastrar"}
@@ -192,7 +198,6 @@ export default function ProductCreate() {
 
   const handleFormSubmit = () => {
     if (formRef.current) {
-      // console.log(formRef.current.dispatchEvent(new Event('submit')));
       formRef.current.requestSubmit();
     }
   };
@@ -230,7 +235,7 @@ export default function ProductCreate() {
 
     try {
       const payload = await makePayload(productData);
-      await api.post('/products', payload);
+      await api.post(`/products/user/${user.id}`, payload);
 
       setLoading(false);
       setProductCreated(true);
@@ -243,7 +248,12 @@ export default function ProductCreate() {
 
   return (
     <Container component="main" maxWidth="lg" sx={{ mb: { xs: 8, md: 4 }, p: { xs: 0 } }}>
-      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 }, mb: { xs: 4 }, borderRadius: { xs: 0 } }}>
+      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 }, mb: { xs: 4 }, borderRadius: { xs: 0 }, position: 'relative' }}>
+        <Tooltip title="Configurações do produto">
+          <IconButton size="small" sx={{ position: 'absolute', right: 2, top: 2, color: grey[400] }}>
+            <SettingsIcon />
+          </IconButton>
+        </Tooltip>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
           {steps.map((step) => (
             <Step key={step.label}>

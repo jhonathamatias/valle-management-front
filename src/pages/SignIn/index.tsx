@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, SubmitErrorHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { SignInInterface } from '../../interfaces/signIn.interface';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -75,7 +75,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Entrar no App
           </Typography>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
             <TextField

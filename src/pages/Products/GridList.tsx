@@ -14,6 +14,9 @@ import Typography from '@mui/material/Typography';
 import Paper, { PaperProps } from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
 import CircularProgress, {
   circularProgressClasses,
 } from '@mui/material/CircularProgress';
@@ -71,8 +74,8 @@ const PaperContainer = styled(Paper, {
 })<PaperContainerProps>(({
   empty,
 }) => ({
-  ...(empty && {height: '200px'}),
-  boxShadow: 'none',
+  ...(empty && { height: '200px' }),
+  // boxShadow: 'none',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center'
@@ -209,16 +212,35 @@ export default function GridList() {
     </Box>
   );
 
+  const search = (
+    <Paper
+      component="form"
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%', mb: 3 }}
+    >
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Pesquise pelo nome de produto"
+        inputProps={{ 'aria-label': 'search' }}
+      />
+      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
+    </Paper>
+  )
+
   return (
-    <PaperContainer empty={Boolean(products.length === 0)}>
-      {(products.length === 0) ?
-        initialContainer :
-        (
-          <List sx={{ width: '100%', p: 0 }}>
-            {renderProductsList()}
-          </List>
-        )
-      }
-    </PaperContainer>
+    <>
+      {search}
+      <PaperContainer empty={Boolean(products.length === 0)}>
+        {(products.length === 0) ?
+          initialContainer :
+          (
+            <List sx={{ width: '100%', p: 0 }}>
+              {renderProductsList()}
+            </List>
+          )
+        }
+      </PaperContainer>
+    </>
   );
 }
