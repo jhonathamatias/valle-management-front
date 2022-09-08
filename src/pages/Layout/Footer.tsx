@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuthContext } from '../../store/AuthContext';
+import { yellow } from '@mui/material/colors';
 
 export default function Footer({
   sidebarOpen,
@@ -34,7 +35,7 @@ export default function Footer({
           <MenuIcon />
         </IconButton>
         <Tooltip title="Notificações">
-          <IconButton color="inherit" aria-label="open drawer">
+          <IconButton sx={{ color: yellow[700] }} aria-label="open drawer">
             <NotificationsIcon />
           </IconButton>
         </Tooltip>

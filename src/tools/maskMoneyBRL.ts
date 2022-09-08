@@ -14,3 +14,7 @@ function maskCurrency(valor: any, locale = 'pt-BR', currency = 'BRL') {
     currency
   }).format(valor);
 }
+
+export function format(value: number) {
+  return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+}

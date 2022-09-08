@@ -9,7 +9,14 @@ interface User {
   password: string;
 }
 
+interface UserLogged {
+  id: number;
+  name: string;
+  email: string;
+}
+
 interface AuthContextType {
+  user: UserLogged;
   authenticated: boolean;
   login: (user: User, callback: VoidFunction, failback: (error: any) => void) => void;
   logout: (callback?: VoidFunction) => void;
@@ -19,6 +26,8 @@ const AuthContext = createContext<AuthContextType>(null!);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken, clearToken] = useStorage('token');
+  const [user, setUser, clearUser] = useStorage('user');
+  const [userLogged, setUserLogged] = useState<UserLogged>({} as UserLogged);
   const [authenticated, setAuthenticated] = useState(Boolean(token));
   const location = useLocation();
 
@@ -28,7 +37,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const checkAuthorization = useCallback(async () => {
     try {
-      const response = await api.get('/me');
+      const { data } = await api.get('/me');
+
+      setUser(data);
+      setUserLogged({
+        id: data.id,
+        name: data.name,
+        email: data.email
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 401) {
@@ -53,6 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = (callback?: VoidFunction) => {
     clearToken();
+    clearUser();
     setAuthenticated(false);
 
     if (callback) {
@@ -62,6 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return <AuthContext.Provider
     value={{
+      user: userLogged,
       authenticated,
       login,
       logout

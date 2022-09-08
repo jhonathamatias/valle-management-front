@@ -15,6 +15,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import { DRAWER_WIDTH } from '../../constants/style';
 import { useState } from 'react';
 import { useAuthContext } from '../../store/AuthContext';
+import { yellow } from '@mui/material/colors';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -195,7 +196,7 @@ export default function Header({
             {pageTitle}
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton color="inherit">
+            <IconButton sx={{ color: yellow[600] }}>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
