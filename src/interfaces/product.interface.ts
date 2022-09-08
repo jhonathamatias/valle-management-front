@@ -42,3 +42,20 @@ export interface ProductPayloadInterface {
   price: number;
   size_number: number;
 }
+
+export interface ProductDetailInterface {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+  updated_at: string;
+  color: {
+    name: string;
+    code: string;
+  };
+  size: {
+    name: string;
+    dress_up: number;
+  }
+}

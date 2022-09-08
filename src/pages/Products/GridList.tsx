@@ -25,6 +25,8 @@ import { grey } from '@mui/material/colors';
 import { SxProps } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { XS_MOBILE_MD_SCREEN } from '../../constants/style';
+import ProductDetailOverlay from './ProductDetailOverlay';
+import { ProductDetailInterface } from '../../interfaces/product.interface';
 
 interface ColorCircleProps extends AvatarProps {
   color: string;
@@ -84,6 +86,8 @@ const PaperContainer = styled(Paper, {
 export default function GridList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [overlayOpen, setOverlayOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({} as ProductDetailInterface);
   const isMobile = useMediaQuery(XS_MOBILE_MD_SCREEN);
   const theme = useTheme();
 
@@ -111,10 +115,15 @@ export default function GridList() {
     })
   };
 
+  const handleProductDetailOverlay = (product: ProductDetailInterface) => {
+    setSelectedProduct(product);
+    setOverlayOpen(true);
+  }
+
   const renderProductsList = () => {
     return products.map((product: any) => (
       <Box key={product.id}>
-        <ListItemButton>
+        <ListItemButton onClick={() => handleProductDetailOverlay(product)}>
           <ListItem sx={listItemStyle}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', position: 'relative' }}>
               <ListItemAvatar sx={{ mr: 2 }}>
@@ -241,6 +250,9 @@ export default function GridList() {
           )
         }
       </PaperContainer>
+      {overlayOpen &&
+        <ProductDetailOverlay setOpen={setOverlayOpen} open={overlayOpen} product={selectedProduct} />
+      }
     </>
   );
 }
